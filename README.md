@@ -24,12 +24,10 @@ example-app-venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-**Note:**
-- Activation makes the virtual environment the default Python interpreter for the duration of a shell session. Because, This will prepend that directory to your PATH, so that running python will invoke the virtual environment’s Python interpreter. As an indication of virtual environment activation, current shell prompt will prepend the name of the virtual environment you are currently using.
-
-- To deactivate the environment, simply type `deactivate` and you will return to your normal shell.
-
-- Within the virtual environment, you can use the command `pip` instead of `pip3` and `python` instead of `python3`.
+> [!Note]
+> - Activation makes the virtual environment the default Python interpreter for the duration of a shell session. Because, This will prepend that directory to your PATH, so that running python will invoke the virtual environment’s Python interpreter. As an indication of virtual environment activation, current shell prompt will prepend the name of the virtual environment you are currently using.
+> - To deactivate the environment, simply type `deactivate` and you will return to your normal shell.
+> - Within the virtual environment, you can use the command `pip` instead of `pip3` and `python` instead of `python3`.
 
 ## Run and Test the App on Local Machine
 To start the web server of the app, execute the below command -
@@ -60,9 +58,9 @@ To check the webapp, open a browser and hit the below URL -
     curl http://localhost:5000
 ```
 
-**Note:** 
-- ( . ) tells about the build context. The build context is the current directory (.), which should contain your application code and the Dockerfile. Pass the Dockerfile, if its name is not exactly Dockerfile.
-- Port mapping is used to access the services running inside a Docker container. In the above case, we can now access the application using port 5000 on the host machine.
+> [!IMPORTANT]
+> - ( . ) tells about the build context. The build context is the current directory (.), which should contain your application code and the Dockerfile. Pass the Dockerfile, if its name is not exactly Dockerfile.
+> - Port mapping is used to access the services running inside a Docker container. In the above case, we can now access the application using port 5000 on the host machine.
 
 ## References
 - https://www.warp.dev/terminus/docker-logs-tail
