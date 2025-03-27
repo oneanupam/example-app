@@ -60,9 +60,9 @@ To check the webapp, open a browser and hit the below URL -
     curl http://localhost:5000
 ```
 
-**Note:** 
-- ( . ) tells about the build context. The build context is the current directory (.), which should contain your application code and the Dockerfile. Pass the Dockerfile, if its name is not exactly Dockerfile.
-- Port mapping is used to access the services running inside a Docker container. In the above case, we can now access the application using port 5000 on the host machine.
+> [!IMPORTANT]
+> ( . ) tells about the build context. The build context is the current directory (.), which should contain your application code and the Dockerfile. Pass the Dockerfile, if its name is not exactly Dockerfile.
+> Port mapping is used to access the services running inside a Docker container. In the above case, we can now access the application using port 5000 on the host machine.
 
 ## References
 - https://www.warp.dev/terminus/docker-logs-tail
