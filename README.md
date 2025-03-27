@@ -24,12 +24,10 @@ example-app-venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-**Note:**
-- Activation makes the virtual environment the default Python interpreter for the duration of a shell session. Because, This will prepend that directory to your PATH, so that running python will invoke the virtual environment’s Python interpreter. As an indication of virtual environment activation, current shell prompt will prepend the name of the virtual environment you are currently using.
-
-- To deactivate the environment, simply type `deactivate` and you will return to your normal shell.
-
-- Within the virtual environment, you can use the command `pip` instead of `pip3` and `python` instead of `python3`.
+> [!Note]
+> - Activation makes the virtual environment the default Python interpreter for the duration of a shell session. Because, This will prepend that directory to your PATH, so that running python will invoke the virtual environment’s Python interpreter. As an indication of virtual environment activation, current shell prompt will prepend the name of the virtual environment you are currently using.
+> - To deactivate the environment, simply type `deactivate` and you will return to your normal shell.
+> - Within the virtual environment, you can use the command `pip` instead of `pip3` and `python` instead of `python3`.
 
 ## Run and Test the App on Local Machine
 To start the web server of the app, execute the below command -
