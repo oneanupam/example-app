@@ -1,0 +1,14 @@
+FROM ubuntu
+
+# Case-01
+CMD ["echo", "hello world"]
+
+# Case-02
+# ENTRYPOINT ["echo", "hello world"]
+
+# Case-03
+# ENTRYPOINT ["echo"]
+
+# Case-04
+# ENTRYPOINT ["echo"]
+# CMD ["hello world"]
