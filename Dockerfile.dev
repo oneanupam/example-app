@@ -17,17 +17,17 @@ RUN groupadd --gid $GROUPID $GROUPNAME && useradd --uid $USERID --gid $GROUPID -
 
 # Install the tools required for the project
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
-    python3-venv
+  python3 \
+  python3-pip \
+  python3-venv
 
 # Copy requirements file and install all the required python packages
 WORKDIR /app
 COPY python/requirements.txt /app
 # RUN pip3 install --no-cache-dir --break-system-packages -r requirements.txt
 RUN python3 -m venv appenv \
-    && . appenv/bin/activate \
-    && pip install --no-cache-dir -r requirements.txt
+  && . appenv/bin/activate \
+  && pip install --no-cache-dir -r requirements.txt
 
 # Stage 02: Run
 FROM python:3.10-slim
