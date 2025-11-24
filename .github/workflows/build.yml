@@ -39,7 +39,7 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: |
-            ghcr.io/${{ github.repository }}/eapp:${{ github.event.inputs.environment }}-${{ github.run_number }}-${{ env.GIT_SHA }}
+            ghcr.io/${{ github.repository }}/eapp:${{ github.run_number }}-${{ env.GIT_SHA }}
           outputs: type=docker,dest=/tmp/eapp.tar
 
       - name: Push Docker image
@@ -50,7 +50,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/eapp:${{ github.event.inputs.environment }}-${{ github.run_number }}-${{ env.GIT_SHA }}
+            ghcr.io/${{ github.repository }}/eapp:${{ github.run_number }}-${{ env.GIT_SHA }}
 
       - name: Log out from Docker Registry
         if: always()
