@@ -1,0 +1,81 @@
+# Terraform pipeline to deploy infrastructure resourcse to azure cloud platform
+
+trigger:
+  branches:
+    include:
+      - main # Trigger the pipeline when code is merged into main
+
+pr:
+  branches:
+    include:
+      - main # Trigger the pipeline when a pull request targets the main branch
+
+pool:
+  name: azure-vms-pool
+  demands:
+    - agent.name -equals azure-windows-vm # To run on a specific agent in a pool
+
+variables:
+  subscriptionId: "51580edc-cdbf-4484-a549-ddd64f2264d6"
+
+stages:
+  - stage: infra_deployment
+    jobs:
+      - job: terraform_build
+        pool:
+          name: "azure-vms-pool"
+          demands:
+            - agent.name -equals azure-windows-vm
+        steps:
+          - task: TerraformInstaller@1
+            displayName: intsall_terraform
+            inputs:
+              terraformVersion: "1.9.0"
+
+          - task: PowerShell@2
+            displayName: get_current_workspace
+            inputs:
+              targetType: "inline"
+              script: |
+                Write-Host "Pipeline workspace: $(System.DefaultWorkingDirectory)"
+                Write-Host "System Working Directory: $(System.DefaultWorkingDirectory)"
+                Write-Host "Current working directory content: $(dir)"
+
+          - task: TerraformTaskV4@4
+            displayName: run_tf_init
+            inputs:
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform"
+              provider: "azurerm"
+              command: "custom"
+              customCommand: "init"
+              outputTo: "console"
+              environmentServiceNameAzureRM: "tf-azure-service-connection"
+            env:
+              ARM_SUBSCRIPTION_ID: $(subscriptionId)
+
+          - task: TerraformTaskV4@4
+            displayName: run_tf_plan
+            inputs:
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform"
+              provider: "azurerm"
+              command: "custom"
+              customCommand: "plan"
+              commandOptions: "-out=tfplan"
+              outputTo: "console"
+              environmentServiceNameAzureRM: "tf-azure-service-connection"
+            env:
+              ARM_SUBSCRIPTION_ID: $(subscriptionId)
+
+          - task: TerraformTaskV4@4
+            displayName: run_tf_apply
+            condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+            inputs:
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform"
+              provider: "azurerm"
+              command: "custom"
+              customCommand: "apply"
+              commandOptions: "tfplan"
+              outputTo: "console"
+              environmentServiceNameAzureRM: "tf-azure-service-connection"
+            env:
+              ARM_SUBSCRIPTION_ID: $(subscriptionId)
